@@ -66,6 +66,10 @@ public protocol PagingViewControllerDelegate: class {
     _ pagingViewController: PagingViewController<T>,
     widthForPagingItem pagingItem: T,
     isSelected: Bool) -> CGFloat?
+    
+    func pagingViewController<T>(
+      _ pagingViewController: PagingViewController<T>,
+      didSelectedSame pagingItem: T)
 }
 
 public extension PagingViewControllerDelegate {
@@ -103,4 +107,9 @@ public extension PagingViewControllerDelegate {
     isSelected: Bool) -> CGFloat? {
     return nil
   }
+    func pagingViewController<T>(
+      _ pagingViewController: PagingViewController<T>,
+      didSelectedSame pagingItem: T) {
+      return
+    }
 }

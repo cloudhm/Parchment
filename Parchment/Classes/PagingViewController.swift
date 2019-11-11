@@ -992,11 +992,14 @@ open class PagingViewController<T: PagingItem>:
     
     let selectedPagingItem = visibleItems.pagingItem(for: indexPath)
     let direction = visibleItems.direction(from: currentPagingItem, to: selectedPagingItem)
-
-    stateMachine.fire(.select(
-      pagingItem: selectedPagingItem,
-      direction: direction,
-      animated: true))
+    if selectedPagingItem != currentPagingItem {
+        stateMachine.fire(.select(
+          pagingItem: selectedPagingItem,
+          direction: direction,
+          animated: true))
+    } else {
+        delegate?.pagingViewController(self, didSelectedSame: currentPagingItem)
+    }
   }
   
   open func collectionView(_ collectionView: UICollectionView, targetContentOffsetForProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
